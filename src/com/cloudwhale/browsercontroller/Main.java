@@ -9,7 +9,9 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         SeleniumBrowserController controller = new SeleniumBrowserController();
+
         controller.openUrl(LAUNCHER_URL);
+
         boolean titleMatchesHa = controller.titleMatches("ha!");
         boolean titleMatches2ButtonLauncher = controller.titleMatches("Unity WebGL Player | 2ButtonLauncher");
 
@@ -18,7 +20,7 @@ public class Main {
 
         Thread.sleep(2000);
 
-        controller.closeUrl();
+        controller.quit();
     }
 
     /*
