@@ -25,3 +25,4 @@ hs_err_pid*
 
 # Selenium Package files
 !SeleniumFiles/*
+.idea/workspace.xml
