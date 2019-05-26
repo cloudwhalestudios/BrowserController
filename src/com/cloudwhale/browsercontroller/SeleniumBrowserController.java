@@ -2,12 +2,16 @@ package com.cloudwhale.browsercontroller;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import javax.swing.*;
 import org.openqa.selenium.NoSuchWindowException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 
 class SeleniumBrowserController extends JFrame {
+
+    private Boolean manualControl = false;
 
     private WebDriver driver;
     private JLabel label;
@@ -55,6 +59,7 @@ class SeleniumBrowserController extends JFrame {
         add(label, BorderLayout.SOUTH);
 
         // Configure launch button
+        jButton1.setEnabled(manualControl);
         jButton1.setText("Open '"+ url + "'");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -69,6 +74,17 @@ class SeleniumBrowserController extends JFrame {
                         openBrowserAndWait();
                     }
                 }, 10);
+            }
+        });
+
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentShown(ComponentEvent e) {
+                super.componentShown(e);
+                if (!manualControl) {
+                    label.setText("Loading browser. Please wait..");
+                    openBrowserAndWait();
+                }
             }
         });
     }
